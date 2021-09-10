@@ -29,7 +29,6 @@ const Users = ({ users, totalCount }: InferGetServerSidePropsType<typeof getServ
       setUsersData(users);
     }
     const delayDebounceFn = setTimeout(() => {
-      console.log(searchTerm);
       // Send Axios request here
       if (searchTerm) {
         setFetchingUsers(true);

@@ -3,7 +3,6 @@ import { getUser, getUserCards, getUserAddresses, User } from "../../services/us
 import Container from "@material-ui/core/Container";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Link from "next/link";
 import Head from "next/head";
 import Typography from "@material-ui/core/Typography";
 import SimpleCard from "../../components/SimpleCard";

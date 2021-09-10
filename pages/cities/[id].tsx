@@ -1,5 +1,5 @@
 import { InferGetServerSidePropsType, GetServerSideProps } from "next";
-import { getCityByName } from "../../services/cities";
+import { getCityById } from "../../services/cities";
 import { getUsersByIds, User } from "../../services/users";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
@@ -9,15 +9,15 @@ import Typography from "@material-ui/core/Typography";
 import SimpleCard from "../../components/SimpleCard";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id, name } = context.query;
-  console.log("id", id);
-  const city = await getCityByName(name);
-  const users = await getUsersByIds(city[0].users);
-  console.log("userss", users);
-  console.log("cityy", city);
-  return {
-    props: { city: city[0], users },
-  };
+  const { id } = context.query;
+  if (id && typeof id === "string") {
+    const city = await getCityById(id);
+    const users = await getUsersByIds(city.users);
+    return {
+      props: { city, users },
+    };
+  }
+  return { props: {} };
 };
 
 const renderUsers = (users: User[]) => {
@@ -38,7 +38,6 @@ const renderUsers = (users: User[]) => {
 };
 
 const City = ({ city, users }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log("city", city);
   return (
     <div style={{ marginTop: "72px" }}>
       <Head>

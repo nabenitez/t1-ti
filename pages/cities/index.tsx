@@ -25,29 +25,16 @@ const Cities = ({ cities, totalCount }: InferGetServerSidePropsType<typeof getSe
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log(searchTerm);
-      // Send Axios request here
-    }, 3000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
-
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      console.log(searchTerm);
       // Send Axios request here
       if (searchTerm) {
         setFetchingCities(true);
         findCities(searchTerm).then(({ cities }) => {
           setCitiesData(cities);
-          console.log("cities", cities);
           setFetchingCities(false);
         });
       } else {
         setCitiesData(cities);
       }
-
-      //!searchTerm && setUsersData(users);
     }, 1000);
 
     return () => clearTimeout(delayDebounceFn);
