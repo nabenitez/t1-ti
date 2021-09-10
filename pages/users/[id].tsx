@@ -44,7 +44,8 @@ type List = {
   value?: string;
 };
 
-const RenderCards = ({ cards }) => {
+type Card = { creditCard: string; CVV: string };
+const RenderCards = ({ cards }: { cards: Card[] }) => {
   const classes = useStyles();
   return (
     <Grid container direction="column" spacing={2}>
@@ -67,7 +68,12 @@ const RenderCards = ({ cards }) => {
   );
 };
 
-const RenderAddresses = ({ addresses }) => {
+type Address = {
+  city: { id: string; name: string; country: string };
+  address: string;
+};
+
+const RenderAddresses = ({ addresses }: { addresses: Address[] }) => {
   const router = useRouter();
   const classes = useStyles();
   return (

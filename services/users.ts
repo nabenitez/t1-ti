@@ -38,3 +38,8 @@ export const getUserAddresses = async (id: string): Promise<User> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}/addresses`);
   return await res.json();
 };
+
+export const findUsers = async (query: string): Promise<{ users: User[]; totalCount: number }> => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users?q=${query}`);
+  return { users: await res.json(), totalCount: Number(res.headers.get("x-total-count")) };
+};
